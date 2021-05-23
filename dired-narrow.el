@@ -165,10 +165,9 @@ when `dired-narrow-exit-when-one-left' and `dired-narrow-enable-blinking' are tr
                 (dired-insert-set-properties (line-beginning-position) (1+ (line-end-position)))))
           (put-text-property (line-beginning-position) (1+ (line-end-position)) :dired-narrow t)
           (put-text-property (line-beginning-position) (1+ (line-end-position)) 'invisible :dired-narrow))))
-    (unless (dired-hacks-next-file)
-      (dired-hacks-previous-file))
-    (unless (dired-utils-get-filename)
-      (dired-hacks-previous-file))
+    ; move point to first matching file (if any)
+    (beginning-of-buffer)
+    (dired-hacks-next-file)
     visible-files-cnt))
 
 (defun dired-narrow--restore ()
