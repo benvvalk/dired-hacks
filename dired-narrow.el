@@ -219,6 +219,8 @@ when `dired-narrow-exit-when-one-left' and `dired-narrow-enable-blinking' are tr
         (setq dired-narrow--minibuffer-content current-filter)
         (setq dired-narrow--current-file (dired-utils-get-filename))
         (set-window-point (get-buffer-window (current-buffer)) (point))
+        (when (bound-and-true-p hl-line-mode)
+          (hl-line-highlight))
 
         (when (and dired-narrow-exit-when-one-left
                    visible-files-cnt
